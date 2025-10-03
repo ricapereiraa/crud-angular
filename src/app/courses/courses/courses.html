@@ -1,10 +1,17 @@
 
-<mat-card style="margin: 20px; padding: 20px;">
 
+
+<mat-card style="margin: 20px;">
   <mat-toolbar color="primary">
   <span>Courses</span>
 </mat-toolbar>
-<table mat-table [dataSource]="courses" class="mat-elevation-z8" style="margin-top: 20px; padding: 20px;" >
+
+<div *ngIf="courses | async as courses; else loading">
+</div>
+
+
+<table mat-table [dataSource]="courses" class="mat-elevation-z8">
+
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -32,6 +39,12 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>
+<ng-template #loading>
+  <p>Loading courses...</p>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
 </mat-card>
 
